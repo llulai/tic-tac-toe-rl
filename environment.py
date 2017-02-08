@@ -13,14 +13,16 @@ def get_valid_moves(state):
         for i in range(len(state)):
             for j in range(len(state[i])):
                 if state[i][j] == 0:
-                    valid_moves.append((i, j))
+                    valid_moves.append(i*3 + j)
 
         return valid_moves
 
 
 def make_move(state, action, tile):
     new_state = deepcopy(state)
-    new_state[action[0]][action[1]] = tile
+    i = int(action / 3)
+    j = action % 3
+    new_state[i][j] = tile
 
     return new_state
 
@@ -44,4 +46,4 @@ def get_winner(state):
     if state[0][2] == state[1][1] == state[2][0] != 0:
         return state[1][1]
 
-    return False
+    return 0
